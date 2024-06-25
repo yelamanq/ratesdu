@@ -1,0 +1,44 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+
+<div class="content login">
+		<img src="{% static 'main/img/logo.svg' %}" alt="">
+		<h1>Welcome back!</h1>
+		<span class="login_subtitle">All details have been provided in the <span style="color: #1F2ADE; font-weight: 500;">message</span></span>
+		<form method="post" class="login_form">
+			{% csrf_token %}
+			<div class="login_input shake">
+				<label for="">Student ID</label>
+				{{ form.username }}
+			</div>
+			<div class="login_input shake">
+				<label for="">Password</label>
+				<div class="password_input">
+					<img id="eye" src="{% static 'main/img/eye_open.svg' %}" data-close="{% static 'main/img/eye_close.svg' %}" data-open="{% static 'main/img/eye_open.svg' %}"  onclick="editPasswordType()" alt="">
+					{{ form.password }}
+				</div>
+			</div>
+			{% if form.errors %}
+				<br>
+				<span class="error">{{ form.non_field_errors }}</span>
+				<script>
+					document.addEventListener('DOMContentLoaded', function() {
+						wrong();
+					});
+				</script>
+			{% endif %}
+			<div class="login_input">
+				<button type="submit">Login</button>
+			</div>
+		</form>
+		<div class="forgot">
+			<a href="{% url 'password_reset' %}">Forgot Password? <span style="color: #1F2ADE; font-weight: 500;">Recover</span></a>
+		</div>
+	</div>
+
+{% endblock %}

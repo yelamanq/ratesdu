@@ -1,0 +1,316 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% block title %} Home page {% endblock %}
+
+{% block content %}
+<script>
+    free = [{% for cabinet in cabinets %}'{{ cabinet }}', {% endfor %}];
+</script>
+<style>
+    .map {
+        max-width: 250px;
+        border: 1px solid rgba(1, 1, 1, 0.3);
+        padding: 40px 80px;
+        border-radius: 20px;
+    }
+</style>
+<div class="content">
+    <div class="map">
+        <svg id="_Слой_2" data-name="Слой 2" xmlns="http://www.w3.org/2000/svg"
+             xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 272.89 776.05">
+            <defs>
+                <style>
+                    .cls-1, .cls-2, .cls-3 {
+                      font-family: Roboto-Medium, Roboto;
+                      font-weight: 500;
+                    }
+
+                    .cls-4 {
+                      font-size: 3.72px;
+                    }
+
+                    .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9, .cls-10, .cls-11 {
+                      font-family: Roboto-Regular, Roboto;
+                    }
+
+                    .cls-4, .cls-6, .cls-12, .cls-7, .cls-8, .cls-3, .cls-9, .cls-10, .cls-11 {
+                      fill: #6b6b6b;
+                    }
+
+                    .cls-13 {
+                      fill: url(#_Безымянный_градиент_32-5);
+                    }
+
+                    .cls-13, .cls-14, .cls-15, .cls-16, .cls-17, .cls-18, .cls-19, .cls-20, .cls-21 {
+                      stroke-width: 0px;
+                    }
+
+                    .cls-14 {
+                      fill: url(#_Безымянный_градиент_32-2);
+                    }
+
+                    .cls-15 {
+                      fill: url(#_Безымянный_градиент_32-4);
+                    }
+
+                    .cls-16 {
+                      fill: url(#_Безымянный_градиент_32-3);
+                    }
+
+                    .cls-6 {
+                      font-size: 4.41px;
+                    }
+
+                    .cls-12 {
+                      font-size: 14.32px;
+                      opacity: .27;
+                    }
+
+                    .cls-2 {
+                      letter-spacing: 0em;
+                    }
+
+                    .cls-17 {
+                      fill: #a5a5a5;
+                    }
+
+                    .cls-18 {
+                      fill: #a0a0a0;
+                    }
+
+                    .cls-7 {
+                      font-size: 10.56px;
+                    }
+
+                    .cls-19 {
+                      fill: url(#_Безымянный_градиент_32);
+                    }
+
+                    .cls-8 {
+                      font-size: 9.69px;
+                    }
+
+                    .cls-3, .cls-10 {
+                      font-size: 7.22px;
+                    }
+
+                    .cls-9 {
+                      font-size: 6.18px;
+                    }
+
+                    .cls-20 {
+                      fill: #c6c6c6;
+                    }
+
+                    .cls-21 {
+                      fill: #fff;
+                    }
+
+                    .cls-11 {
+                      font-size: 8.14px;
+                    }
+                </style>
+                <radialGradient id="_Безымянный_градиент_32" data-name="Безымянный градиент 32" cx="215.65" cy="66.65"
+                                fx="215.65" fy="66.65" r="42.14" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#e6e6e6"></stop>
+                    <stop offset="1" stop-color="#c6c6c6"></stop>
+                </radialGradient>
+                <radialGradient id="_Безымянный_градиент_32-2" data-name="Безымянный градиент 32" cx="179.77" cy="540.9"
+                                fx="179.77" fy="540.9" r="22.47" xlink:href="#_Безымянный_градиент_32"></radialGradient>
+                <radialGradient id="_Безымянный_градиент_32-3" data-name="Безымянный градиент 32" cx="179.77"
+                                cy="687.02" fx="179.77" fy="687.02" r="22.47"
+                                xlink:href="#_Безымянный_градиент_32"></radialGradient>
+                <radialGradient id="_Безымянный_градиент_32-4" data-name="Безымянный градиент 32" cx="205.29"
+                                cy="625.28" fx="205.29" fy="625.28" r="29.44"
+                                xlink:href="#_Безымянный_градиент_32"></radialGradient>
+                <radialGradient id="_Безымянный_градиент_32-5" data-name="Безымянный градиент 32" cx="206.32"
+                                cy="744.59" fx="206.32" fy="744.59" r="31.46"
+                                xlink:href="#_Безымянный_градиент_32"></radialGradient>
+            </defs>
+            <g id="_Слой_1-2" data-name="Слой 1">
+                <polygon class="cls-20"
+                         points="185.74 303.97 185.74 308.12 205.19 308.12 205.19 313.03 177.83 313.03 177.83 299.05 205.19 299.05 205.19 303.97 185.74 303.97"></polygon>
+                <path class="cls-20"
+                      d="M170.23,122.64h13.2v45.29h-13.2c-2.93,0-5.3-2.37-5.3-5.3v-34.69c0-2.93,2.37-5.3,5.3-5.3Z"></path>
+                <polygon class="cls-20"
+                         points="193.57 167.94 193.57 167.93 185.43 167.93 185.43 122.64 205.62 122.64 205.62 162.87 211.1 167.94 193.57 167.94"></polygon>
+                <path class="cls-20"
+                      d="M262.17,225.55l-24.13,26.09c-2.85,3.08-7.66,3.27-10.74.42l-45.08-41.7c-3.08-2.85-3.27-7.65-.42-10.73l12.06-13.04,14.57-15.76,2.66-2.87.57.53,50.08,46.34c3.08,2.85,3.27,7.66.42,10.74Z"></path>
+                <polygon class="cls-20"
+                         points="217.13 15.38 193.18 32.63 186.73 24.77 186.73 .3 187.1 0 204.5 0 217.13 15.38"></polygon>
+                <path class="cls-19"
+                      d="M188.48,38.82l31.98-23.29c2.53-1.84,6.07-1.27,7.9,1.26l18.69,25.96-19.47,14.02c-2.94-3.87-7.6-6.36-12.84-6.36-2.11,0-4.13.41-5.98,1.14l-11.06,8.05-10.28-12.67c-2.04-2.51-1.55-6.22,1.06-8.12Z"></path>
+                <path class="cls-19"
+                      d="M224.18,79.73l14.01,19.46-32.57,23.45-17.89-24.83c-1.82-2.53-1.25-6.06,1.28-7.88l15.28-11c2.81,2.4,6.46,3.84,10.45,3.84,3.53,0,6.79-1.13,9.44-3.04Z"></path>
+                <path class="cls-19"
+                      d="M266.21,79.01l-26.39,19-14.09-19.55c3.19-2.96,5.18-7.19,5.18-11.87,0-2.98-.8-5.77-2.21-8.16l19.52-14.05,19.27,26.75c1.82,2.53,1.25,6.06-1.28,7.88Z"></path>
+                <path class="cls-20"
+                      d="M272.89,320.63v22.67h-2.68v7.47l-28.96,40v28.36c0,4.2-3.4,7.6-7.6,7.6h-3.64c-2.53,0-4.58,2.05-4.58,4.58v72.82l8.52,13.66-7.9,12.67h-20.23v-21.03c0-2.93-2.37-5.3-5.3-5.3h-33.72c-4.2,0-7.6-3.4-7.6-7.6v-183.5h106.09c4.2,0,7.6,3.4,7.6,7.6Z"></path>
+                <rect class="cls-18" x="159.2" y="451.43" width="66.23" height="8.41"></rect>
+                <circle class="cls-14" cx="179.77" cy="540.9" r="22.47" id="E117"></circle>
+                <circle class="cls-16" cx="179.77" cy="687.02" r="22.47" id="D116"></circle>
+                <circle class="cls-15" cx="205.29" cy="625.28" r="29.44" id="D113"></circle>
+                <circle class="cls-13" cx="206.32" cy="744.59" r="31.46" id="D117"></circle>
+                <rect class="cls-20" x="205.82" y="532.46" width="19.61" height="22.81"></rect>
+                <path class="cls-20"
+                      d="M205.82,557.27h19.61v20.65c0,2.93-2.37,5.3-5.3,5.3h-9.01c-2.93,0-5.3-2.37-5.3-5.3v-20.65Z"></path>
+                <rect class="cls-20" x="23.89" y="714.13" width="19.36" height="35.45" id="D104"></rect>
+                <rect class="cls-20" x="45.24" y="714.13" width="19.36" height="35.45" id="D103"></rect>
+                <rect class="cls-20" x="66.6" y="714.13" width="19.36" height="35.45" id="D102"></rect>
+                <path class="cls-20" d="M124.3,714.13h-14.98v35.45h20.36v-30.07c0-2.97-2.41-5.37-5.37-5.37Z"></path>
+                <rect class="cls-20" x="87.96" y="714.13" width="19.36" height="35.45" id="D101"></rect>
+                <path class="cls-20"
+                      d="M21.89,714.13H6.9c-2.97,0-5.37,2.41-5.37,5.37v24.7c0,2.97,2.41,5.37,5.37,5.37h14.98v-35.45Z"
+                      id="D105"></path>
+                <path class="cls-20" d="M129.67,611.72v49.07h-22.86c.07-.45.11-.91.11-1.37l1.76-47.7h20.99Z"></path>
+                <polygon class="cls-20" points="44.55 697.77 20.8 699.65 20.8 699.64 44.55 697.77"></polygon>
+                <path class="cls-20"
+                      d="M106.54,662.79v30.08l9.78-.77c7.53-.59,13.34-6.88,13.34-14.44v-14.87h-23.13Z"></path>
+                <path class="cls-20"
+                      d="M104.54,665.78v27.25l-24.89,1.97-19.71,1.56-2,.15-13.39,1.06-23.75,1.87-2,.16-6.31.5-5.68.45c-2.93.23-5.5-1.93-5.77-4.86l-1.02-10.96c-.27-2.93,1.86-5.53,4.78-5.85l11.79-1.26h0s1.99-.21,1.99-.21l37.04-3.96,1.99-.22,11.34-1.21,29.28-3.13c2.53-.27,4.75-1.51,6.31-3.31Z"></path>
+                <rect class="cls-20" x="23.89" y="559.03" width="19.36" height="35.45" id="E104"></rect>
+                <rect class="cls-20" x="45.24" y="559.03" width="19.36" height="35.45" id="E103"></rect>
+                <rect class="cls-20" x="66.6" y="559.03" width="19.36" height="35.45" id="E102"></rect>
+                <path class="cls-20" d="M129.67,564.4v30.08h-20.36v-35.45h14.98c2.97,0,5.38,2.41,5.38,5.37Z"></path>
+                <rect class="cls-20" x="87.95" y="559.03" width="19.36" height="35.45" id="E101"></rect>
+                <path class="cls-20"
+                      d="M21.89,559.03H6.9c-2.97,0-5.37,2.41-5.37,5.37v24.7c0,2.97,2.41,5.37,5.37,5.37h14.98v-35.45Z"
+                      id="E105"></path>
+                <path class="cls-20" d="M129.67,456.62v49.07h-22.86c.07-.45.11-.91.11-1.37l1.76-47.7h20.99Z"></path>
+                <polygon class="cls-20" points="72.52 540.46 59.94 541.46 59.94 541.45 72.52 540.46"></polygon>
+                <path class="cls-20"
+                      d="M106.54,507.69v30.08l9.78-.77c7.53-.59,13.34-6.88,13.34-14.44v-14.87h-23.13Z"></path>
+                <path class="cls-20"
+                      d="M104.54,510.68v27.25l-32.02,2.53-12.58.99h0s-2,.16-2,.16l-37.14,2.94-2,.16-6.73.53-5.26.41c-2.93.23-5.5-1.93-5.77-4.86l-1.02-10.96c-.27-2.93,1.86-5.53,4.78-5.84l7.27-.78,4.52-.48,1.99-.22,37.04-3.96,1.99-.21,20.04-2.15,20.58-2.2c2.53-.27,4.75-1.51,6.31-3.31Z"></path>
+                <polygon class="cls-20" points="16.59 522.72 16.59 522.73 12.07 523.21 16.59 522.72"></polygon>
+                <rect class="cls-20" x="23.89" y="403.93" width="19.36" height="35.45" id="F104"></rect>
+                <rect class="cls-20" x="45.24" y="403.93" width="19.36" height="35.45" id="F103"></rect>
+                <rect class="cls-20" x="66.6" y="403.93" width="19.36" height="35.45" id="F102"></rect>
+                <path class="cls-20" d="M124.3,403.93h-14.98v35.45h20.36v-30.07c0-2.97-2.41-5.37-5.37-5.37Z"></path>
+                <rect class="cls-20" x="87.96" y="403.93" width="19.36" height="35.45" id="F101"></rect>
+                <path class="cls-20"
+                      d="M21.89,403.93H6.9c-2.97,0-5.37,2.41-5.37,5.37v24.7c0,2.97,2.41,5.37,5.37,5.37h14.98v-35.45Z"
+                      id="F105"></path>
+                <path class="cls-20" d="M129.67,301.52v49.07h-22.86c.07-.45.11-.91.11-1.37l1.76-47.7h20.99Z"></path>
+                <polygon class="cls-20" points="65.82 385.89 59.94 386.36 59.94 386.35 65.82 385.89"></polygon>
+                <polygon class="cls-20" points="49.28 387.2 20.8 389.45 20.8 389.44 49.28 387.2"></polygon>
+                <path class="cls-20"
+                      d="M106.54,352.59v30.08l9.78-.77c7.53-.59,13.34-6.88,13.34-14.44v-14.87h-23.13Z"></path>
+                <path class="cls-20"
+                      d="M104.54,355.58v27.25l-38.72,3.06-5.88.46-2,.16-8.66.69-28.48,2.24-2,.16h0s-11.99.95-11.99.95c-2.93.23-5.5-1.93-5.77-4.86L.02,374.73c-.27-2.93,1.86-5.53,4.78-5.84l2.91-.31,7.67-.83,1.21-.13,1.99-.21,37.04-3.96,1.99-.21,8.21-.88,32.41-3.47c2.53-.27,4.75-1.51,6.31-3.31Z"></path>
+                <rect class="cls-20" x="23.89" y="248.83" width="19.36" height="35.45" id="G104"></rect>
+                <rect class="cls-20" x="45.24" y="248.83" width="19.36" height="35.45" id="G103"></rect>
+                <rect class="cls-20" x="66.6" y="248.83" width="19.36" height="35.45" id="G102"></rect>
+                <path class="cls-20" d="M129.67,254.21v30.07h-20.36v-35.45h14.98c2.97,0,5.38,2.41,5.38,5.38Z"></path>
+                <rect class="cls-20" x="87.95" y="248.83" width="19.36" height="35.45" id="G101"></rect>
+                <path class="cls-20"
+                      d="M21.89,248.83H6.9c-2.97,0-5.37,2.41-5.37,5.37v24.7c0,2.97,2.41,5.37,5.37,5.37h14.98v-35.45Z"
+                      id="G105"></path>
+                <path class="cls-20" d="M129.67,146.42v49.07h-22.86c.07-.45.11-.91.11-1.37l1.76-47.7h20.99Z"></path>
+                <path class="cls-20"
+                      d="M106.54,197.49v30.08l9.78-.77c7.53-.59,13.34-6.88,13.34-14.44v-14.87h-23.13Z"></path>
+                <path class="cls-20"
+                      d="M104.54,200.48v27.25l-28.26,2.24-16.34,1.29-27,2.13-12.14.96-2,.15-4.38.35-7.61.6c-2.93.23-5.5-1.93-5.77-4.86L.02,219.63c-.27-2.93,1.86-5.53,4.78-5.84l3.59-.39,8.2-.88,1.99-.21,37.04-3.96,17.8-1.91h0s24.81-2.65,24.81-2.65c2.53-.27,4.75-1.51,6.31-3.31Z"></path>
+                <polygon class="cls-20" points="18.8 234.5 18.8 234.51 14.42 234.85 18.8 234.5"></polygon>
+                <rect class="cls-20" x="23.88" y="93.73" width="40.72" height="35.45" id="H102"></rect>
+                <rect class="cls-20" x="66.6" y="93.73" width="40.71" height="35.45" id="H101"></rect>
+                <path class="cls-20" d="M129.67,99.11v30.07h-20.36v-35.45h14.98c2.97,0,5.38,2.41,5.38,5.38Z"></path>
+                <path class="cls-20"
+                      d="M21.89,93.73H6.9c-2.97,0-5.37,2.41-5.37,5.37v24.7c0,2.97,2.41,5.37,5.37,5.37h14.98v-35.45Z"
+                      id="H103"></path>
+                <path class="cls-20" d="M129.67,0v40.39h-22.86c.07-.45.11-.91.11-1.37l1.76-39.02h20.99Z"></path>
+                <polygon class="cls-20" points="57.94 76.31 57.94 76.32 20.8 79.25 57.94 76.31"></polygon>
+                <path class="cls-20"
+                      d="M106.54,42.39v30.08l9.78-.77c7.53-.59,13.34-6.88,13.34-14.44v-14.87h-23.13Z"></path>
+                <path class="cls-20"
+                      d="M104.54,45.38v27.25l-27.05,2.14-17.55,1.39-2,.15-37.14,2.94-2,.15-4.39.35-7.6.6c-2.93.23-5.5-1.93-5.77-4.86L.02,64.53c-.27-2.93,1.86-5.53,4.78-5.84l4.6-.5,7.19-.77,1.99-.21,37.04-3.96,1.99-.21,18.67-2,21.95-2.35c2.53-.27,4.75-1.51,6.31-3.31Z"></path>
+                <polygon class="cls-20" points="18.8 79.4 18.8 79.41 14.41 79.75 18.8 79.4"></polygon>
+                <text class="cls-8" transform="translate(173.96 392.63)">
+                    <tspan x="0" y="0">Ac Catering</tspan>
+                </text>
+                <text class="cls-12" transform="translate(82.94 709.4)">
+                    <tspan class="cls-5" x="0" y="0">Block</tspan>
+                    <tspan class="cls-1" x="38.86" y="0">D</tspan>
+                </text>
+                <text class="cls-12" transform="translate(82.94 554.27)">
+                    <tspan class="cls-5" x="0" y="0">Block</tspan>
+                    <tspan class="cls-1" x="38.86" y="0">E</tspan>
+                </text>
+                <text class="cls-12" transform="translate(82.94 399.14)">
+                    <tspan class="cls-5" x="0" y="0">Block</tspan>
+                    <tspan class="cls-1" x="38.86" y="0">F</tspan>
+                </text>
+                <text class="cls-12" transform="translate(82.94 245.01)">
+                    <tspan class="cls-5" x="0" y="0">Block</tspan>
+                    <tspan class="cls-1" x="38.86" y="0">G</tspan>
+                </text>
+                <text class="cls-12" transform="translate(82.94 88.13)">
+                    <tspan class="cls-5" x="0" y="0">Block</tspan>
+                    <tspan class="cls-2" x="38.86" y="0">H</tspan>
+                </text>
+                <text class="cls-10" transform="translate(207.96 214.92)">
+                    <tspan x="0" y="0">Blue Hall</tspan>
+                </text>
+                <text class="cls-3" transform="translate(113.96 269.36)">
+                    <tspan x="0" y="0">WC</tspan>
+                </text>
+                <text class="cls-3" transform="translate(113.96 424.89)">
+                    <tspan x="0" y="0">WC</tspan>
+                </text>
+                <text class="cls-3" transform="translate(113.96 580.41)">
+                    <tspan x="0" y="0">WC</tspan>
+                </text>
+                <text class="cls-3" transform="translate(113.96 734.94)">
+                    <tspan x="0" y="0">WC</tspan>
+                </text>
+                <text class="cls-3" transform="translate(113.96 114.7)">
+                    <tspan x="0" y="0">WC</tspan>
+                </text>
+                <text class="cls-9" transform="translate(174.88 481.65)">
+                    <tspan x="0" y="0">Red Canteen</tspan>
+                </text>
+                <text class="cls-11" transform="translate(170.6 543.87)" id="T_E117">
+                    <tspan x="0" y="0">E117</tspan>
+                </text>
+                <text class="cls-11" transform="translate(195.76 628.03)" id="T_D113">
+                    <tspan x="0" y="0">D113</tspan>
+                </text>
+                <text class="cls-11" transform="translate(170.24 689.42)" id="T_D116">
+                    <tspan x="0" y="0">D116</tspan>
+                </text>
+                <text class="cls-7" transform="translate(193.96 748.19)" id="T_D117">
+                    <tspan x="0" y="0">D117</tspan>
+                </text>
+                <text class="cls-6" transform="translate(213.9 519.34)">
+                    <tspan x="0" y="0">Urbo</tspan>
+                </text>
+                <text class="cls-4" transform="translate(210.87 544.81)">
+                    <tspan x="0" y="0">office</tspan>
+                </text>
+                <text class="cls-4" transform="translate(210.87 570.25)">
+                    <tspan x="0" y="0">office</tspan>
+                </text>
+                <rect class="cls-21" x="193.29" y="504.13" width="40" height="2"></rect>
+                <polygon class="cls-20" points="15.38 367.75 7.71 368.58 7.71 368.57 15.38 367.75"></polygon>
+                <rect class="cls-17" x="159.2" y="299.05" width="18.63" height="13.98"></rect>
+            </g>
+        </svg>
+    </div>
+</div>
+<script>
+    free.forEach(function(cab) {
+            var el = document.getElementById(cab);
+            var text = document.getElementById('T_'+cab);
+            if (el) {
+                el.style.fill = "#1F2ADE";
+                el.style.cursor = "pointer";
+<!--                el.style.filter = "drop-shadow(0 0 5px rgba(31, 42, 222, 0.5))";-->
+            }
+            if (text) {
+                text.style.fill = "white";
+            }
+        });
+</script>
+{% endblock %}

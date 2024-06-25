@@ -1,0 +1,31 @@
+{% load static %}
+
+{% if teachers %}
+    <div class="table_header">
+        <span>Name</span>
+        <span>Rating</span>
+    </div>
+    <hr>
+    {% for teacher in teachers %}
+        <a href="{% url 'teacher_pk' teacher.teacher_id %}" class="talbe_column">
+                <div class="column_start">
+                    {% if teacher.gender %}
+                        <img src="{% static 'main/img/avatars/male/' %}{{ teacher.avatar_id }}.png" alt="">
+                    {% else %}
+                        <img src="{% static 'main/img/avatars/female/' %}{{ teacher.avatar_id }}.png" alt="">
+                    {% endif %}
+                    <span class="name">{{ teacher.name }}</span>
+                </div>
+                <div class="column_end">
+                    <div id="rating-container">
+                        <div class="stars-background"></div>
+                        <div class="stars-foreground" data-rating="{{ teacher.overall }}"></div>
+                    </div>
+                    <div class="rating_info">{{ teacher.review_count }} reviews</div>
+                </div>
+            </a>
+            <hr>
+    {% endfor %}
+{% else %}
+    <div style="text-align: center; opacity: 0.5; width: 100%">No teachers found!</div>
+{% endif %}

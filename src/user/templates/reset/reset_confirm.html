@@ -1,0 +1,46 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block title %} Reset Password {% endblock %}
+
+{% block content %}
+
+<form method="post" class="content login">
+	{% csrf_token %}
+	<img src="{% static 'main/img/logo.svg' %}" alt="">
+	<h1>Recover account</h1>
+	<span class="login_subtitle">Password recovery link will be sent</span>
+	<div method="post" class="login_form">
+		<div class="login_input shake">
+			<label for="">New password:</label>
+			{{ form.new_password1 }}
+			<br>
+			<label for="">Confirm password:</label>
+			{{ form.new_password2 }}
+			{% if form.errors %}
+				<br>
+				<span class="error">{{ form.new_password2.errors }}</span>
+				<script>
+					document.addEventListener('DOMContentLoaded', function() {
+						wrong();
+					});
+				</script>
+			{% endif %}
+		</div>
+		<div class="login_input">
+			<button type="submit">Reset password</button>
+		</div>
+		{% if error == 1 %}
+			<script>
+				document.addEventListener('DOMContentLoaded', function() {
+					wrong();
+				});
+			</script>
+		{% endif %}
+	</div>
+	<div class="forgot">
+		<a href="{% url 'login' %}"><span style="color: #1F2ADE; font-weight: 500;">Sign In</span></a>
+	</div>
+</form>
+
+{% endblock %}

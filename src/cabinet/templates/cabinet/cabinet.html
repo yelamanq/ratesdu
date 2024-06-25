@@ -1,0 +1,55 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% block title %} Home page {% endblock %}
+
+{% block content %}
+		<div class="content">
+			<div class="header">
+				<a href="{% url 'main' %}"><img src="{% static 'main/img/logo.svg' %}" alt=""></a>
+				<div class="nav_profiles">
+					<div class="nav_profile">
+						<img src="{% static 'main/img/burger.svg' %}" alt="">
+						<p>Menu</p>
+						<img class="menu_dropdown" src="{% static 'main/img/dropdowndown.svg' %}" alt="">
+					</div>
+					<div class="nav_profile_burger">
+						<a href="{% url 'profile' %}">Profile</a>
+						<a href="{% url 'cabinet' %}">Cabinets</a>
+						<a href="{% url 'teacher' %}">Teachers</a>
+						<a href="{% url 'message' %}">Messages</a>
+						<a class="burger_logout" href="{% url 'logout' %}">Log Out</a>
+					</div>
+				</div>
+			</div>
+			<div class="teacher_info">
+				<h1>{{ cabinet.name }}</h1>
+				<div class="teacher_rating" style="margin-bottom: 10px;">
+					{% for tag in tags %}
+						{% if tag.value > 1 %}
+							<span class="overall_score">{{ tag.value }} places</span>
+						{% endif %}
+					{% endfor %}
+					<span class="overall_text">
+						{% if status %}
+							Busy
+						{% else %}
+							Free
+						{% endif %}
+					</span>
+					<div class="circle"></div>
+					<span class="review_count">{{ time }}</span>
+				</div>
+			</div>
+			<div class="tags">
+				{% for tag in tags %}
+					{% if tag.value < 2 %}
+						<span class="overall_score">{{ tag.caption }}</span>
+					{% endif %}
+				{% endfor %}
+			</div>
+
+			{{ schedule_table_html|safe }}
+		</div>
+{% endblock %}

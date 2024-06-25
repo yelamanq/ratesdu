@@ -1,0 +1,30 @@
+{% load static %}
+
+{% if cabinets %}
+
+    <div class="table_header">
+        <span>Cabinet</span>
+        <span>Status</span>
+    </div>
+    {% for cabinet in cabinets %}
+        <hr>
+        <a href="{% url 'cabinet' cabinet.id %}" class="talbe_column">
+            <div class="column_start">
+                <span class="name">{{ cabinet.name }}</span>
+            </div>
+            <div class="column_end">
+                {% if cabinet.status %}
+                    <div class="status important">
+                        Busy
+                    </div>
+                {% else %}
+                    <div class="status primary">
+                        Free
+                    </div>
+                {% endif %}
+            </div>
+        </a>
+    {% endfor %}
+{% else %}
+    <div style="text-align: center; opacity: 0.5; width: 100%">No cabinets found!</div>
+{% endif %}

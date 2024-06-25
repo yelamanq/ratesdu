@@ -1,0 +1,75 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% block title %} Home page {% endblock %}
+
+{% block content %}
+	<script>
+		function search() {
+			query = document.getElementById('search_input').value
+
+			$.ajax({
+				type:"GET",
+				url:"{% url 'search_cabinet_empty' %}" + query,
+				success:function(response){
+					$(".table").html(response);
+				}
+			});
+		}
+	</script>
+	<div class="content">
+		<div class="header">
+				<a href="{% url 'main' %}"><img src="{% static 'main/img/logo.svg' %}" alt=""></a>
+				<div class="nav_profiles">
+					<div class="nav_profile">
+						<img src="{% static 'main/img/burger.svg' %}" alt="">
+						<p>Menu</p>
+						<img class="menu_dropdown" src="{% static 'main/img/dropdowndown.svg' %}" alt="">
+					</div>
+					<div class="nav_profile_burger">
+						<a href="{% url 'profile' %}">Profile</a>
+						<a href="{% url 'cabinet' %}">Cabinets</a>
+						<a href="{% url 'teacher' %}">Teachers</a>
+						<a href="{% url 'message' %}">Messages</a>
+						<a class="burger_logout" href="{% url 'logout' %}">Log Out</a>
+					</div>
+				</div>
+			</div>
+		<div class="search_header">
+			<h1>Look Up Your Cabinet</h1>
+		</div>
+		<div class="search_input">
+			<img src="{% static 'main/img/search_icon.svg' %}" alt="">
+			<input type="text" placeholder="Search" oninput="search()" id="search_input">
+		</div>
+		<div class="table">
+			<div class="table_header">
+				<span>Cabinet</span>
+				<span>Status</span>
+			</div>
+			{% for cabinet in cabinets %}
+				<hr>
+				<a href="{% url 'cabinet' cabinet.id %}" class="talbe_column">
+					<div class="column_start">
+						<span class="name">{{ cabinet.name }}</span>
+					</div>
+					<div class="column_end">
+						{% if cabinet.status %}
+							<div class="status important">
+								Busy
+							</div>
+						{% else %}
+							<div class="status primary">
+								Free
+							</div>
+						{% endif %}
+					</div>
+				</a>
+			{% endfor %}
+		</div>
+	</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% block title %} Home page {% endblock %}
+
+{% block content %}
+<script>
+	function read(id) {
+		$.ajax({
+			url: "{% url 'read' %}",
+			type: "POST",
+			data: {
+				'message_id': id,
+				'csrfmiddlewaretoken': '{{ csrf_token }}'
+			},
+			success: function(data) {
+				location.reload();
+			}
+		});
+	}
+	{% if user.is_staff %}
+		function openLink(lesson_id) {
+			window.location = "{% url 'lesson_empty' %}"+lesson_id
+		}
+	{% endif %}
+</script>
+<div class="content">
+		<div class="header">
+				<a href="{% url 'main' %}"><img src="{% static 'main/img/logo.svg' %}" alt=""></a>
+				<div class="nav_profiles">
+					<div class="nav_profile">
+						<img src="{% static 'main/img/burger.svg' %}" alt="">
+						<p>Menu</p>
+						<img class="menu_dropdown" src="{% static 'main/img/dropdowndown.svg' %}" alt="">
+					</div>
+					<div class="nav_profile_burger">
+						<a href="{% url 'profile' %}">Profile</a>
+						<a href="{% url 'cabinet' %}">Cabinets</a>
+						<a href="{% url 'teacher' %}">Teachers</a>
+						<a href="{% url 'message' %}">Messages</a>
+						<a class="burger_logout" href="{% url 'logout' %}">Log Out</a>
+					</div>
+				</div>
+			</div>
+
+		{% for message in messages %}
+			<div class="important_messages">
+				<div class="messg_top">
+					<div class="messg_left">
+						<h3>{{ message.title }}</h3>
+						<div class="level_messg">
+							<p>{{ message.teacher }}</p>
+						</div>
+					</div>
+					<div class="messg_right">
+						<img src="{% static 'main/img/x.svg' %}" alt="" onclick="read({{ message.id }})">
+					</div>
+				</div>
+				<div class="messg_desc">
+					<p>{{ message.content }}</p>
+				</div>
+			</div>
+		{% endfor %}
+		<br>
+		<br>
+		<br>
+		{% if user.is_staff %}
+			<h1>Your lessons:</h1>
+		{% else%}
+			<h1>Your schedule:</h1>
+		{% endif %}
+		{{ schedule_table|safe }}
+<!--		<table><tbody><tr><td>Day/Hour</td><td> <span>Mo</span></td><td> <span>Tu</span></td><td> <span>We</span></td><td> <span>Th</span></td><td> <span>Fr</span></td><td> <span>Sa</span></td></tr><tr><td><span>09:00</span><br><span>09:50</span></td><td><a>INF 313</a><span><br>Inkar S.</span><br><span>E117</span> </td><td><a>INF 338</a><span><br>Farikha N.</span><br><span>D113</span> </td><td><a>MDE 172</a><span><br>Yerzhan C.</span><br><span>F205</span> </td><td><a>INF 203</a><span><br>Gulsim R.</span><br><span>VR 22</span> </td><td><a>MDE 294</a><span><br>Omirbek M.</span><br><span>SH 2</span> </td><td></td></tr><tr><td><span>10:00</span><br><span>10:50</span></td><td><a>MDE 153</a><span><br>Indira K.</span><br><span>VR 75</span> </td><td><a>INF 338</a><span><br>Farikha N.</span><br><span>D113</span> </td><td></td><td><a>INF 203</a><span><br>Gulsim R.</span><br><span>VR 22</span> </td><td></td><td></td></tr><tr><td><span>11:00</span><br><span>11:50</span></td><td><a>CSS 206</a><span><br>Perizat Y.</span><br><span>H 202</span> </td><td><a>INF 313</a><span><br>Bauyrzhan B.</span><br><span>F103</span> </td><td></td><td></td><td></td><td></td></tr><tr><td><span>12:00</span><br><span>12:50</span></td><td></td><td><a>INF 313</a><span><br>Bauyrzhan B.</span><br><span>F103</span> </td><td><a>MDE 154</a><span><br>Yelnura A.</span><br><span>VR 91</span> </td><td></td><td></td><td></td></tr><tr><td><span>13:00</span><br><span>13:50</span></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td><span>14:00</span><br><span>14:50</span></td><td></td><td><a>INF 338</a><span><br>Nurbol S.</span><br><span>F305</span> </td><td><a>INF 207</a><span><br>Bakdaulet A.</span><br><span>D218</span> </td><td><a>INF 207</a><span><br>Aisaule B.</span><br><span>F202</span> </td><td></td><td></td></tr><tr><td><span>15:00</span><br><span>15:50</span></td><td></td><td></td><td><a>INF 207</a><span><br>Bakdaulet A.</span><br><span>D218</span> </td><td></td><td></td><td></td></tr><tr><td><span>16:00</span><br><span>16:50</span></td><td><a>MDE 172</a><span><br>Yerzhan C.</span><br><span>VR 82</span> </td><td></td><td></td><td></td><td><a>CSS 206</a><span><br>Perizat Y.</span><br><span>F303</span> </td><td></td></tr><tr><td><span>17:00</span><br><span>17:50</span></td><td><a>MDE 172</a><span><br>Yerzhan C.</span><br><span>VR 82</span> </td><td></td><td><a>INF 203</a><span><br>Farikha N.</span><br><span>F305</span> </td><td></td><td><a>CSS 206</a><span><br>Perizat Y.</span><br><span>F303</span> </td><td></td></tr><tr><td><span>18:00</span><br><span>18:50</span></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td><span>19:00</span><br><span>19:50</span></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td><span>20:00</span><br><span>20:50</span></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td><span>21:00</span><br><span>21:50</span></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td><span>22:00</span><br><span>22:50</span></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>-->
+	</div>
+</div>
+{% endblock %}

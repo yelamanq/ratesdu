@@ -1,0 +1,64 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% block title %} Home page {% endblock %}
+
+{% block content %}
+		<div class="content">
+			<div class="header">
+				<a href="{% url 'main' %}"><img src="{% static 'main/img/logo.svg' %}" alt=""></a>
+				<div class="nav_profiles">
+					<div class="nav_profile">
+						<img src="{% static 'main/img/burger.svg' %}" alt="">
+						<p>Menu</p>
+						<img class="menu_dropdown" src="{% static 'main/img/dropdowndown.svg' %}" alt="">
+					</div>
+					<div class="nav_profile_burger">
+						<a href="{% url 'profile' %}">Profile</a>
+						<a href="{% url 'cabinet' %}">Cabinets</a>
+						<a href="{% url 'teacher' %}">Teachers</a>
+						<a href="{% url 'message' %}">Messages</a>
+						<a class="burger_logout" href="{% url 'logout' %}">Log Out</a>
+					</div>
+				</div>
+			</div>
+			<div class="teacher_info">
+				<h1>{{ code }}</h1>
+				<div class="teacher_rating" style="margin-bottom: 10px;">
+					<span class="overall_text">
+						{{ name }}
+					</span>
+				</div>
+			</div>
+            <br>
+            <br>
+            <br>
+            <h1 style="font-weight: 500">Send message</h1>
+            <form action="" method="post" class="comment_form">
+				{% csrf_token %}
+                {{ form.title }}
+				{{ form.content }}
+				<input type="submit" name="" class="submit" value="Send">
+			</form>
+			{% if success %}
+				<span class="success">Message sent successfully</span>
+			{% endif %}
+
+			<div class="table">
+			<div class="table_header">
+				<span>Students</span>
+			</div>
+			{% for student in students %}
+				<hr>
+				<a class="talbe_column">
+					<div class="column_start">
+						<span class="name">{{ forloop.counter }}. {{ student.user__first_name }} {{ student.user__last_name }}</span>
+					</div>
+					<div class="column_end">
+					</div>
+				</a>
+			{% endfor %}
+		</div>
+		</div>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% block title %} My Profile {% endblock %}
+
+{% block content %}
+
+<div class="content">
+		<div class="header">
+				<a href="{% url 'main' %}"><img src="{% static 'main/img/logo.svg' %}" alt=""></a>
+				<div class="nav_profiles">
+					<div class="nav_profile">
+						<img src="{% static 'main/img/burger.svg' %}" alt="">
+						<p>Menu</p>
+						<img class="menu_dropdown" src="{% static 'main/img/dropdowndown.svg' %}" alt="">
+					</div>
+					<div class="nav_profile_burger">
+						<a href="{% url 'profile' %}">Profile</a>
+						<a href="{% url 'cabinet' %}">Cabinets</a>
+						<a href="{% url 'teacher' %}">Teachers</a>
+						<a href="{% url 'message' %}">Messages</a>
+						<a class="burger_logout" href="{% url 'logout' %}">Log Out</a>
+					</div>
+				</div>
+			</div>
+		<h1 class="student_name">{{ user.first_name }} {{ user.last_name }}</h1>
+		<div class="student_id">{{ user.username }}</div>
+		{% if form %}
+			<form class="change_password" method="post">
+				{% csrf_token %}
+				<div class="login_input">
+					<label for="">Old password</label>
+					<div class="password_input shake">
+						{{ form.old_password  }}
+					</div>
+				</div>
+				<div class="login_input">
+					<label for="">New password</label>
+					<div class="password_input shake">
+						{{ form.new_password1 }}
+					</div>
+				</div>
+				<div class="login_input">
+					<label for="">Confirm password</label>
+					<div class="password_input shake">
+						{{ form.new_password2 }}
+					</div>
+				</div>
+				<div class="login_input">
+					{% if success %}
+						<span class="success">Password changed successfully</span>
+					{% endif %}
+				<span class="error">{{ form.errors.old_password }}</span>
+				<span class="error">{{ form.errors.new_password2 }}</span>
+					<button>Change password</button>
+				</div>
+				{% if form.errors %}
+					<script>
+						document.addEventListener('DOMContentLoaded', function() {
+							wrong();
+						});
+					</script>
+				{% endif %}
+			</form>
+			<br>
+			<br>
+			<br>
+		{% endif %}
+		<div class="about_teacher">
+				<span>{{ form|yesno:'My reviews, Reviews' }}</span>
+				{% if comments %}
+					{% if comments|length == 1 %}
+						<div class="circle"></div>
+						<span class="comments_count">1 comment</span>
+					{% else %}
+						<div class="circle"></div>
+						<span class="comments_count">{{ comments | length }} comments</span>
+					{% endif %}
+				{% endif %}
+		</div>
+		<br>
+		{% if not comments %}
+			<div style="opacity: 0.5; margin-top: -5px">{{ form|yesno:'You, User' }} have not reviewed any teacher yet</div>
+		{% endif %}
+		<div class="comments">
+			{% for comment in comments %}
+				<div class="comment">
+					<div class="top_info">
+						<a class="comment_teacher" href="{% url 'teacher_pk' comment.teacher_id %}">> {{ comment.teacher_name }}</a>
+						<a class="delete" href="delete_comment/{{ comment.comment_id }}">Delete</a>
+					</div>
+					<span class="comment_text">{{ comment.content }}</span>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

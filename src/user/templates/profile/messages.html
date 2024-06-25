@@ -1,0 +1,49 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% block title %} Home page {% endblock %}
+
+{% block content %}
+	<div class="content">
+		<div class="header">
+				<a href="{% url 'main' %}"><img src="{% static 'main/img/logo.svg' %}" alt=""></a>
+				<div class="nav_profiles">
+					<div class="nav_profile">
+						<img src="{% static 'main/img/burger.svg' %}" alt="">
+						<p>Menu</p>
+						<img class="menu_dropdown" src="{% static 'main/img/dropdowndown.svg' %}" alt="">
+					</div>
+					<div class="nav_profile_burger">
+						<a href="{% url 'profile' %}">Profile</a>
+						<a href="{% url 'cabinet' %}">Cabinets</a>
+						<a href="{% url 'teacher' %}">Teachers</a>
+						<a href="{% url 'message' %}">Messages</a>
+						<a class="burger_logout" href="{% url 'logout' %}">Log Out</a>
+					</div>
+				</div>
+			</div>
+        <div class="messages_title">
+            <h1>Messages</h1>
+        </div>
+		{% for message in messages %}
+			<div class="important_messages">
+			<div class="messg_top">
+					<div class="messg_left">
+						<h3>{{ message.title }}</h3>
+						<div class="level_messg">
+							<p>{{ message.teacher }}</p>
+						</div>
+					</div>
+					<div class="messg_right">
+						<p class="messg_delete">{{ message.date }}</p>
+					</div>
+				</div>
+				<div class="messg_desc">
+					<p>{{ message.content }}</p>
+				</div>
+			</div>
+		{% endfor %}
+
+	</div>
+{% endblock %}

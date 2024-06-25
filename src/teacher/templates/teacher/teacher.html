@@ -1,0 +1,211 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% block title %} Teacher Profile {% endblock %}
+
+{% block content %}
+
+<script>
+	ratings = {
+		{% for i in rate %}
+			{{ forloop.counter }}: [{{ i.rate_id }}, '{{ i.rate_text }}', 0],
+		{% endfor %}
+	}
+
+	var current = -1;
+
+	function rate(rating) {
+		ratings[current][2] = rating
+
+		const elements = document.querySelectorAll('.rate_img');
+		i = 0;
+		elements.forEach(element => {
+			if (i<rating) {
+				element.src = element.getAttribute('data-on')
+			} else {
+				element.src = element.getAttribute('data-off')
+			}
+			i++
+		});
+	}
+
+	function showRateWindow(current) {
+		window.current = current;
+		rate(ratings[current][2])
+		document.getElementById("rate_text").innerHTML = ratings[current][1]
+
+		const el = document.querySelectorAll(".active");
+		el.forEach(function(element) {
+			element.classList.remove("active");
+		});
+		document.querySelectorAll('.slider')[current-1].classList.add("active")
+
+		document.getElementById("next_button").onclick = function() {showRateWindow(current+1)}
+		document.getElementById("prev_button").onclick = function() {showRateWindow(current-1)}
+
+		document.getElementById("next_button").value = "Next"
+
+		try { document.querySelector('.disabled').classList.remove("disabled"); } catch (e) { }
+		if (current == 1) {
+			document.getElementById("prev_button").classList.add("disabled")
+		} else if (current == Object.keys(ratings).length) {
+			document.getElementById("next_button").value = "Finish"
+			document.getElementById("next_button").onclick = function() {finish()}
+		}
+
+		document.querySelector('.rate').style.display = "flex"
+		document.querySelector('.rate_background').style.display = "flex"
+		setTimeout(() => {
+			document.querySelector('.rate').style.opacity = 1;
+		}, this.animationDelay + 20);
+		setTimeout(() => {
+			document.querySelector('.rate_background').style.opacity = 1;
+		}, this.animationDelay + 20);
+	}
+
+
+	function hideRateWindow() {
+		document.querySelector('.rate').style.display = "none"
+		document.querySelector('.rate_background').style.display = "none"
+		document.querySelector('.rate').style.opacity = 0;
+		document.querySelector('.rate_background').style.opacity = 0;
+	}
+
+	function finish() {
+		hideRateWindow()
+		$.ajax({
+			type:"POST",
+			url:"{% url 'rate' %}",
+			data: 'ratings='+JSON.stringify(ratings)+'&teacher_id={{ teacher.pk }}&csrfmiddlewaretoken={{ csrf_token }}',
+
+			success:function(response){
+				$(".table").html(response);
+			}
+		});
+		setTimeout(function(){
+		   window.location.reload(1);
+		}, 100)
+	}
+
+</script>
+<div class="content">
+			<div class="rate" style="display: none; opacity: 0;">
+				<img src="{% static 'main/img/x.svg' %}" class="exit" alt="" onclick="hideRateWindow()">
+				<h1 id="rate_text">Rate Teacher's Subject Knowledge</h1>
+				<span>{{ teacher.teacher_name }}</span>
+				<div class="stars">
+					<img src="{% static 'main/img/star_off.svg' %}" data-off="{% static 'main/img/star_off.svg' %}"  data-on="{% static 'main/img/star_on.svg' %}" class="rate_img" alt="" onclick="rate(1)">
+					<img src="{% static 'main/img/star_off.svg' %}" data-off="{% static 'main/img/star_off.svg' %}"  data-on="{% static 'main/img/star_on.svg' %}" class="rate_img" alt="" onclick="rate(2)">
+					<img src="{% static 'main/img/star_off.svg' %}" data-off="{% static 'main/img/star_off.svg' %}"  data-on="{% static 'main/img/star_on.svg' %}" class="rate_img" alt="" onclick="rate(3)">
+					<img src="{% static 'main/img/star_off.svg' %}" data-off="{% static 'main/img/star_off.svg' %}"  data-on="{% static 'main/img/star_on.svg' %}" class="rate_img" alt="" onclick="rate(4)">
+					<img src="{% static 'main/img/star_off.svg' %}" data-off="{% static 'main/img/star_off.svg' %}"  data-on="{% static 'main/img/star_on.svg' %}" class="rate_img" alt="" onclick="rate(5)">
+					<img src="{% static 'main/img/star_off.svg' %}" data-off="{% static 'main/img/star_off.svg' %}"  data-on="{% static 'main/img/star_on.svg' %}" class="rate_img" alt="" onclick="rate(6)">
+					<img src="{% static 'main/img/star_off.svg' %}" data-off="{% static 'main/img/star_off.svg' %}"  data-on="{% static 'main/img/star_on.svg' %}" class="rate_img" alt="" onclick="rate(7)">
+					<img src="{% static 'main/img/star_off.svg' %}" data-off="{% static 'main/img/star_off.svg' %}"  data-on="{% static 'main/img/star_on.svg' %}" class="rate_img" alt="" onclick="rate(8)">
+					<img src="{% static 'main/img/star_off.svg' %}" data-off="{% static 'main/img/star_off.svg' %}"  data-on="{% static 'main/img/star_on.svg' %}" class="rate_img" alt="" onclick="rate(9)">
+					<img src="{% static 'main/img/star_off.svg' %}" data-off="{% static 'main/img/star_off.svg' %}"  data-on="{% static 'main/img/star_on.svg' %}" class="rate_img" alt="" onclick="rate(10)">
+				</div>
+				<div class="navigation">
+					<input type="submit" name="" class="nav_button" id="prev_button" value="Previous">
+					<input type="submit" name="" class="nav_button" id="next_button" value="Next">
+				</div>
+				<div class="pages">
+					{% for i in rate %}
+						<div class="slider active"></div>
+					{% endfor %}
+				</div>
+			</div>
+			<div class="rate_background" style="display: none; opacity: 0;"></div>
+			<div class="header">
+				<a href="{% url 'main' %}"><img src="{% static 'main/img/logo.svg' %}" alt=""></a>
+				<div class="nav_profiles">
+					<div class="nav_profile">
+						<img src="{% static 'main/img/burger.svg' %}" alt="">
+						<p>Menu</p>
+						<img class="menu_dropdown" src="{% static 'main/img/dropdowndown.svg' %}" alt="">
+					</div>
+					<div class="nav_profile_burger">
+						<a href="{% url 'profile' %}">Profile</a>
+						<a href="{% url 'cabinet' %}">Cabinets</a>
+						<a href="{% url 'teacher' %}">Teachers</a>
+						<a href="{% url 'message' %}">Messages</a>
+						<a class="burger_logout" href="{% url 'logout' %}">Log Out</a>
+					</div>
+				</div>
+			</div>
+			<div class="teacher_info">
+				<h1>{{ teacher.first_name }} {{ teacher.last_name }}</h1>
+				<div class="teacher_rating">
+					<span class="overall_score">{{ overall }}</span>
+					<span class="overall_text">Overall Rating</span>
+					<div class="circle"></div>
+					<span class="review_count">{{ review_count }} reviews</span>
+				</div>
+			</div>
+			{% for i in rate %}
+				<div class="progress">
+					<div class="progress_title">{{ i.rate_text }}</div>
+					<div class="progress_bar">
+						<div class="meter">
+							<span style="width: {% widthratio i.overall 1 10 %}%;">
+								<span class="progress_value"></span>
+							</span>
+						</div>
+						<span>{{ i.overall }}</span>
+					</div>
+				</div>
+			{% endfor %}
+			<div class="rate_button" onclick="showRateWindow(1)">
+				<span>Rate This Teacher</span>
+				<img src="{% static 'main/img/flash.svg' %}" alt="">
+			</div>
+			<div class="hr">
+				<hr>
+				<div class="white">
+					<span style="color: #7F848A; font-weight: 300;">Feel free to comment <span style="color: #040404; font-weight: 500;">anonymously</span>
+					</span>
+					<img src="{% static 'main/img/anonym.svg' %}" alt="">
+				</div>
+			</div>
+			<div class="about_teacher">
+				<span>About Teacher</span>
+				<div class="circle"></div>
+				<span class="comments_count">
+					{% if comments %}
+						{% if comments|length == 1 %}
+							1 comment
+						{% else %}
+							{{ comments | length }} comments
+						{% endif %}
+					{% else %}
+						No comments yet
+					{% endif %}
+				</span>
+			</div>
+			<form method="post" class="comment_form">
+				{% csrf_token %}
+				{{ form.content }}
+				<input type="submit" name="" class="submit">
+			</form>
+			<div class="comments">
+				{% for comment in comments %}
+				<div class="comment">
+					<div class="top_info">
+						<span class="username_comment">
+							{% if comment.user_id == user.pk %}
+								<span style="color: #1F2ADE;">Me</span>
+							{% elif comment.is_super_user %}
+								<a href="{% url 'user' comment.user_id %}">Anonymous user - <span style="color: #1F2ADE;">{{comment.username}}</span></a>
+							{% else %}
+								Anonymous user
+							{% endif %}
+						</span>
+						<span class="comment_date" style="color: #8D8D8D; font-size: 13px;">{{ comment.date }}</span>
+					</div>
+					<span class="comment_text">{{ comment.content }}</span>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+{% endblock %}

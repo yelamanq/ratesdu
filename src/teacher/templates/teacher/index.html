@@ -1,0 +1,75 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% block title %} Home page {% endblock %}
+
+{% block content %}
+<script>
+	function search() {
+		query = document.getElementById('search_input').value
+
+		$.ajax({
+			type:"GET",
+			url:"{% url 'search_empty' %}" + query,
+			success:function(response){
+				$(".table").html(response);
+				setRating()
+			}
+		});
+	}
+</script>
+<div class="content">
+		<div class="header">
+				<a href="{% url 'main' %}"><img src="{% static 'main/img/logo.svg' %}" alt=""></a>
+				<div class="nav_profiles">
+					<div class="nav_profile">
+						<img src="{% static 'main/img/burger.svg' %}" alt="">
+						<p>Menu</p>
+						<img class="menu_dropdown" src="{% static 'main/img/dropdowndown.svg' %}" alt="">
+					</div>
+					<div class="nav_profile_burger">
+						<a href="{% url 'profile' %}">Profile</a>
+						<a href="{% url 'cabinet' %}">Cabinets</a>
+						<a href="{% url 'teacher' %}">Teachers</a>
+						<a href="{% url 'message' %}">Messages</a>
+						<a class="burger_logout" href="{% url 'logout' %}">Log Out</a>
+					</div>
+				</div>
+			</div>
+		<div class="search_header">
+			<h1>Look Up Your Teacher's Ratings Here</h1>
+		</div>
+		<div class="search_input">
+			<img src="{% static 'main/img/search_icon.svg' %}" alt="">
+			<input type="text" placeholder="Search" oninput="search()" id="search_input">
+		</div>
+		<div class="table">
+			<div class="table_header">
+				<span>Name</span>
+				<span>Rating</span>
+			</div>
+			<hr>
+			{% for teacher in teachers %}
+				<a href="{% url 'teacher_pk' teacher.teacher_id %}" class="talbe_column">
+						<div class="column_start">
+							{% if teacher.gender %}
+								<img src="{% static 'main/img/avatars/male/' %}{{ teacher.avatar_id }}.png" alt="">
+							{% else %}
+								<img src="{% static 'main/img/avatars/female/' %}{{ teacher.avatar_id }}.png" alt="">
+							{% endif %}
+							<span class="name">{{ teacher.name }}</span>
+						</div>
+						<div class="column_end">
+							<div id="rating-container">
+								<div class="stars-background"></div>
+								<div class="stars-foreground" data-rating="{{ teacher.overall }}"></div>
+							</div>
+							<div class="rating_info">{{ teacher.review_count }} reviews</div>
+						</div>
+					</a>
+					<hr>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
